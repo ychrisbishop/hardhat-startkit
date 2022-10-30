@@ -2,6 +2,8 @@
 pragma solidity ^0.8.13;
 
 contract UniswapV3Flash {
+    // goerli addres - 0x1F98431c8aD98523631AE4a59f267346ea31F984
+    // address private constant FACTORY = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
     address private constant FACTORY = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
 
     struct FlashCallbackData {
