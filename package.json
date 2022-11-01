@@ -24,6 +24,7 @@
   "dependencies": {
     "@andreybs11/ds-test": "^0.3.0",
     "@openzeppelin/contracts": "^4.7.3",
+    "@uniswap/v3-core": "^1.0.1",
     "dotenv": "^16.0.3",
     "forge-std": "^1.1.2"
   }

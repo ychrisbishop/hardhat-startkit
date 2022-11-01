@@ -10,6 +10,9 @@ const config: HardhatUserConfig = {
     goerli: {
       url: process.env.HARDHAT_ALCHEMY_API_URL,
       accounts: [process.env.HARDHAT_PRIVATE_KEY || '']
+    },
+    hardhat: {
+      
     }
   }
 };
