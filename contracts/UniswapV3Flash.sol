@@ -4,8 +4,7 @@ pragma solidity ^0.8.13;
 contract UniswapV3Flash {
     // goerli addres - 0x1F98431c8aD98523631AE4a59f267346ea31F984
     // address private constant FACTORY = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
-    // address private constant FACTORY = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
-    address FACTORY;
+    address private constant FACTORY = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
 
     struct FlashCallbackData {
         uint amount0;
@@ -21,20 +20,18 @@ contract UniswapV3Flash {
     constructor(
         address _token0,
         address _token1,
-        uint24 _fee,
-        address _factory
+        uint24 _fee
     ) {
         token0 = IERC20(_token0);
         token1 = IERC20(_token1);
         pool = IUniswapV3Pool(getPool(_token0, _token1, _fee));
-        FACTORY = _factory;
     }
 
     function getPool(
         address _token0,
         address _token1,
         uint24 _fee
-    ) public view returns (address) {
+    ) public pure returns (address) {
         PoolAddress.PoolKey memory poolKey = PoolAddress.getPoolKey(
             _token0,
             _token1,

@@ -15,11 +15,7 @@ contract UniswapV3FlashTest {
     IWETH private weth = IWETH(WETH);
     IERC20 private usdc = IERC20(USDC);
 
-    UniswapV3Flash private uni;
-
-    constructor (address _pool) {
-        uni = new UniswapV3Flash(USDC, WETH, POOL_FEE, _pool);
-    }
+    UniswapV3Flash private uni = new UniswapV3Flash(USDC, WETH, POOL_FEE);
 
     function setUp() public {}
 
