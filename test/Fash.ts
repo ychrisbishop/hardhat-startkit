@@ -4,16 +4,16 @@ import { BigNumber } from 'ethers'
 
 describe('FLASH LOAN TEST', function () {
 
-    let FlashTest: any
-    let flashTestContract: any
+    let UniswapV3FlashTest: any
+    let uniswapV3FlashTest: any
 
     const ONE_GWEI = 1_000_000_000;
 
     async function deploy () {
-        FlashTest = await ethers.getContractFactory("UniswapV3FlashTest")
-        flashTestContract = await FlashTest.deploy()
+        UniswapV3FlashTest = await ethers.getContractFactory("UniswapV3FlashTest")
+        uniswapV3FlashTest = await UniswapV3FlashTest.deploy()
 
-        flashTestContract.deployed()
+        uniswapV3FlashTest.deployed()
     }
     const log = (...args:unknown[])=>{
         setTimeout(()=>{
@@ -24,29 +24,28 @@ describe('FLASH LOAN TEST', function () {
         })
     }
     beforeEach(async () => {
-        // await deploy()
+        await deploy()
     })
     // util
     describe('deploy and test flash loan sample function', async function () {
         it('test feature', async () => {
-            // ethers.utils.
-            const amount = BigNumber.from('1')
-            console.log(amount)
-            // log(amount)
+
         })
-        xit('contract address', async () => {
+        it('contract address', async () => {
             
-            const testValue = await flashTestContract.test()
+            const testValue = await uniswapV3FlashTest.test()
 
             log('test value', testValue)
 
+            uniswapV3FlashTest.deposit({value: BigNumber.from(1000 * ONE_GWEI)});
+
             const filter = {
-                address: flashTestContract,
+                address: uniswapV3FlashTest,
                 topics: [
                     ethers.utils.id("Flash(uint, uint)")
                 ]
             }
-            const abi = ["event Flash(uint, uint)"]
+            const abi = ["Flash(uint, uint)"]
             // flashTestContract.on(filter, (allowance: any, fee: any, event: any) => {
             //     log('< flash event >', allowance, fee, event)
             // })
@@ -55,13 +54,16 @@ describe('FLASH LOAN TEST', function () {
             // })
             let iface = new ethers.utils.Interface(abi)
 
-            log(flashTestContract.address)
-            const amount = BigNumber.from(2e15);
-            log('send weth', amount)
+            log(uniswapV3FlashTest.address)
+            // const amount = BigNumber.from(2e15);
+            // log('send weth', amount)
 
-            const tx = await flashTestContract.testFlash({ value: amount })
-            log(tx)
-            const logs = (await tx.wait()).logs
+            // const tx = await uniswapV3FlashTest.testFlash({ value: amount })
+            const tx = await uniswapV3FlashTest.testFlash()
+            // console.log(tx)
+            const txResult = await tx.wait()
+            const logs = txResult.logs
+            console.log(txResult)
             // log(logs[0])
             logs.map((item: any) => {
                 iface.parseLog(item).args.map((arg: any) => {
