@@ -28,9 +28,7 @@ describe('FLASH LOAN TEST', function () {
     })
     // util
     describe('deploy and test flash loan sample function', async function () {
-        it('test feature', async () => {
 
-        })
         it('contract address', async () => {
             
             const testValue = await uniswapV3FlashTest.test()
@@ -39,38 +37,37 @@ describe('FLASH LOAN TEST', function () {
 
             uniswapV3FlashTest.deposit({value: BigNumber.from(1000 * ONE_GWEI)});
 
-            const filter = {
-                address: uniswapV3FlashTest,
-                topics: [
-                    ethers.utils.id("Flash(uint, uint)")
-                ]
-            }
-            const abi = ["Flash(uint, uint)"]
-            // flashTestContract.on(filter, (allowance: any, fee: any, event: any) => {
-            //     log('< flash event >', allowance, fee, event)
+            // const filter = {
+            //     address: uniswapV3FlashTest,
+            //     topics: [
+            //         ethers.utils.id("Flash(uint, uint)")
+            //     ]
+            // }
+            // const abi = ["Flash(uint, uint)"]
+            // // flashTestContract.on(filter, (allowance: any, fee: any, event: any) => {
+            // //     log('< flash event >', allowance, fee, event)
+            // // })
+            // // flashTestContract.on('Flash', (allowance: any, fee: any, event: any) => {
+            // //     log('< flash event >', allowance, fee, event)
+            // // })
+            // let iface = new ethers.utils.Interface(abi)
+
+            // log(uniswapV3FlashTest.address)
+            // // const amount = BigNumber.from(2e15);
+            // // log('send weth', amount)
+
+            // // const tx = await uniswapV3FlashTest.testFlash({ value: amount })
+            // const tx = await uniswapV3FlashTest.testFlash()
+            // // console.log(tx)
+            // const txResult = await tx.wait()
+            // const logs = txResult.logs
+            // console.log(txResult)
+            // // log(logs[0])
+            // logs.map((item: any) => {
+            //     iface.parseLog(item).args.map((arg: any) => {
+            //         log(arg)
+            //     })
             // })
-            // flashTestContract.on('Flash', (allowance: any, fee: any, event: any) => {
-            //     log('< flash event >', allowance, fee, event)
-            // })
-            let iface = new ethers.utils.Interface(abi)
-
-            log(uniswapV3FlashTest.address)
-            // const amount = BigNumber.from(2e15);
-            // log('send weth', amount)
-
-            // const tx = await uniswapV3FlashTest.testFlash({ value: amount })
-            const tx = await uniswapV3FlashTest.testFlash()
-            // console.log(tx)
-            const txResult = await tx.wait()
-            const logs = txResult.logs
-            console.log(txResult)
-            // log(logs[0])
-            logs.map((item: any) => {
-                iface.parseLog(item).args.map((arg: any) => {
-                    log(arg)
-                })
-            })
-
         })
     })
     
