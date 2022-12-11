@@ -10,7 +10,7 @@ contract TriangularSwapper is BaseSwapperV2 {
       address _repayAsset,
       uint256 _repayAmount,
       bytes memory _executionData
-  ) public override {
+  ) internal virtual override {
     
   }
 }
