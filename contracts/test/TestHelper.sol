@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-import "ds-test/test.sol";
-import {IERC20} from "oz/token/ERC20/IERC20.sol";
-import {Vm} from "./Vm.sol";
+// import "ds-test/test.sol";
+import { DSTest } from "../lib/DSTest.sol";
+import { IERC20 } from "../interfaces/IERC20.sol";
+import { Vm } from "./Vm.sol";
 
 contract TestHelper is DSTest {
     Vm internal constant VM = Vm(0x7109709ECfa91a80626fF3989D68f67F5b1DD12D);

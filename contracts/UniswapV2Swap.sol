@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-contract UniswapV2SwapExamples {
+contract UniswapV2Swap {
     address private constant UNISWAP_V2_ROUTER =
         0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
 
@@ -123,6 +123,24 @@ contract UniswapV2SwapExamples {
         }
 
         return amounts[2];
+    }
+    function triangularArbitrage (address[] memory path, uint256 amountIn) external returns (uint256) {
+
+        require(path.length == 4, "path should include 3 items for triangular arbitrage");
+
+        IERC20(path[0]).transferFrom(msg.sender, address(this), amountIn);
+        IERC20(path[0]).approve(address(router), amountIn);
+
+        uint256 amountOutMin = 10;
+        uint[] memory amounts = router.swapExactTokensForTokens(
+            amountIn,
+            amountOutMin,
+            path,
+            msg.sender,
+            block.timestamp
+        );
+
+        return amounts[3];
     }
 }
 

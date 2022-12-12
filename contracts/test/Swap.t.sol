@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-import {IERC20} from "oz/token/ERC20/IERC20.sol";
+import {IERC20} from "../interfaces/IERC20.sol";
 import {TestHelper} from "./TestHelper.sol";
 
 import {TestSwapper} from "./TestSwapper.sol";

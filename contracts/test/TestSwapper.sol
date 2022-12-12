@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-import {BaseSwapperV2} from "./../BaseSwapperV2.sol";
-import {ERC20, SafeTransferLib} from "solmate/utils/SafeTransferLib.sol";
+import { BaseSwapperV2 } from "./../BaseSwapperV2.sol";
+import { ERC20, SafeTransferLib } from "../lib/solmate/src/utils/SafeTransferLib.sol";
 
-import {DSTest} from "ds-test/test.sol";
+// import {DSTest} from "ds-test/test.sol";
+import { DSTest } from '../lib/DSTest.sol';
 
 contract TestSwapper is BaseSwapperV2, DSTest {
     function execute(
