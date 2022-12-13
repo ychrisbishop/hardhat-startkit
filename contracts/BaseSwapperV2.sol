@@ -261,7 +261,7 @@ abstract contract BaseSwapperV2 {
         uint256 _amount0,
         uint256 _amount1,
         bytes calldata _data
-    ) external {
+    ) public {
         (
             address _borrowAsset,
             uint256 _borrowAmount,
