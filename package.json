@@ -33,6 +33,7 @@
   },
   "scripts": {
     "test": "hardhat test --grep 'FLASH LOAN TEST'",
-    "test:goerli": "hardhat test --grep 'FLASH LOAN TEST' --network goerli"
+    "test:goerli": "hardhat test --grep 'FLASH LOAN TEST' --network goerli",
+    "deploy:swap": "hardhat run scripts/deploy-swap.ts"
   }
 }

@@ -13,6 +13,9 @@ async function main() {
   await swapper.deployed();
 
   console.log(`Triangular Swapper deployed to ${swapper.address}`);
+
+  const result = await swapper.test();
+  console.log('result is ', result);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
