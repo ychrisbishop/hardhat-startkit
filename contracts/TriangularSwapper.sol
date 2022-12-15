@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-import './BaseSwapperV2.sol';
-import './UniswapV2Swap.sol';
+import "./BaseSwapperV2.sol";
+import "./UniswapV2Swap.sol";
+import "hardhat/console.sol";
 
-contract TriangularSwapper is BaseSwapperV2 {
+contract triangularArbitrage is BaseSwapperV2 {
   
   event TriangularSwap(address, uint256, address, uint256);
+  event Test(uint);
 
   function execute(
       address _borrowAsset,
@@ -16,14 +18,19 @@ contract TriangularSwapper is BaseSwapperV2 {
       bytes memory _executionData
   ) internal virtual override {
 
-    (address[] memory path) = abi.decode(_executionData, (address[]));
+    (
+        address path0,
+        address path1,
+        address path2,
+        address path3
+    ) = abi.decode(_executionData, (address, address, address, address));
 
-    require(path[0] == _borrowAsset, "borrow asset is not same path 0!");
+    // require(path[0] == _borrowAsset, "borrow asset is not same path 0!");
     
     emit TriangularSwap(_borrowAsset, _borrowAmount, _repayAsset, _repayAmount);
-    UniswapV2Swap uniswap = new UniswapV2Swap();
+    // UniswapV2Swap uniswap = new UniswapV2Swap();
 
-    uniswap.triangularArbitrage(path, _borrowAmount);
+    // uniswap.triangularArbitrage(path, _borrowAmount);
   }
   function test () public returns(uint) {
     //usdt decimals 6
@@ -40,21 +47,24 @@ contract TriangularSwapper is BaseSwapperV2 {
     address DAI = 0x11fE4B6AE13d2a6055C8D9cF65c55bac32B5d844;
     address USDC = 0x07865c6E87B9F70255377e024ace6630C1Eaa37F;
     
-    bytes memory _executionData = abi.encode([
+    bytes memory _executionData = abi.encode(
       WETH,
       DAI,
       USDC,
       WETH
-    ]);
+    );
 
-    bytes memory _data = abi.encode(WETH, _amount0, WETH, 0, _executionData);
-    
-    return 256;
-    // this.uniswapV2Call(
-    //   address(0x03EF36C4A2ad9f53616a32Bf5C41510ee0c06237),
-    //   _amount0, 
-    //   _amount1, 
-    //   _data);
+    bytes memory _data = abi.encode(WETH, _amount0, DAI, 0, _executionData);
+    uint testValue = 25;
+    emit Test(testValue);
+    // return 256;
+    this.uniswapV2Call(
+      msg.sender,
+      _amount0, 
+      _amount1, 
+      _data);
+
+    console.log("this is test function");
     // bytes memory _executionData = abi.encode([
     //   USDT,
     //   WETH,
@@ -69,5 +79,8 @@ contract TriangularSwapper is BaseSwapperV2 {
     //   _amount0, 
     //   _amount1, 
     //   _data);
+  }
+  function _test () internal virtual override {
+
   }
 }

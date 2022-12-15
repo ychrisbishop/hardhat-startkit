@@ -14,8 +14,14 @@ async function main() {
 
   console.log(`Triangular Swapper deployed to ${swapper.address}`);
 
-  const result = await swapper.test();
-  console.log('result is ', result);
+  const tx = await swapper.test();
+  console.log('transaction is ', tx);
+
+  const receipt = await tx.wait();
+  console.log('receipt is ', receipt);
+
+  
+  // web3.eth.abi.decodeLog([{}])
 }
 
 // We recommend this pattern to be able to use async/await everywhere

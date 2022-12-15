@@ -6,19 +6,13 @@ import { ERC20 } from "./lib/solmate/src/tokens/ERC20.sol";
 import { SafeTransferLib } from "./lib/solmate/src/utils/SafeTransferLib.sol";
 import { UnsafeUnilib } from "./lib/UnsafeUnilib.sol";
 
-// We are throwing away requires that are mostly hitting us if we have bad input.
-
-/**
- * @notice Minimal implementation to support Uniswap V2 flash swaps (flashloan + swap)
- * @dev This contract should not be holding any funds beyond a few wei for gas savings.
- * There are no requires or safety checks within the code, meaning that it may revert late
- * if incorrect or bad input is provided.
- * @author Lasse Herskind
- */
 abstract contract BaseSwapperV2 {
     using SafeTransferLib for ERC20;
 
-    address constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+    event SingleExecute(uint256, address);
+    // address constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+    // testnet WETH address
+    address constant WETH = 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6;
 
     /**
      * @notice Execute arbitrary logic for the user.
@@ -28,6 +22,8 @@ abstract contract BaseSwapperV2 {
      * @param _repayAsset The address of the asset to repay with
      * @param _repayAmount The amount to repay
      */
+
+
     function execute(
         address _borrowAsset,
         uint256 _borrowAmount,
@@ -35,6 +31,8 @@ abstract contract BaseSwapperV2 {
         uint256 _repayAmount,
         bytes memory _executionData
     ) internal virtual {}
+
+    function _test () internal virtual {}
 
     /**
      * @notice Performs a Uniswap V2 flash swap through 1 or 2 pairs
@@ -202,6 +200,7 @@ abstract contract BaseSwapperV2 {
      * @param _repayAsset The address of the asset to repay with
      * @param _executionData Bytes to be decoded by `execute` to perform arb
      */
+
     function _singleExecute(
         address _borrowAsset,
         uint256 _borrowAmount,
@@ -213,6 +212,9 @@ abstract contract BaseSwapperV2 {
             _borrowAsset,
             _borrowAmount
         );
+        // uint256 repayAmount = 666;
+        uint256 balance = ERC20(_borrowAsset).balanceOf(address(this));
+        emit SingleExecute(balance, _borrowAsset);
         execute(
             _borrowAsset,
             _borrowAmount,
