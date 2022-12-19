@@ -32,8 +32,6 @@ abstract contract BaseSwapperV2 {
         bytes memory _executionData
     ) internal virtual {}
 
-    function _test () internal virtual {}
-
     /**
      * @notice Performs a Uniswap V2 flash swap through 1 or 2 pairs
      * @param _borrowAsset The address of the asset to borrow
