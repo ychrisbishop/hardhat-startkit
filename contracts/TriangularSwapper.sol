@@ -80,7 +80,4 @@ contract triangularArbitrage is BaseSwapperV2 {
     //   _amount1, 
     //   _data);
   }
-  function _test () internal virtual override {
-
-  }
 }
