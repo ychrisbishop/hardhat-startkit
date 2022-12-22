@@ -27,10 +27,13 @@
     "@uniswap/v3-core": "^1.0.1",
     "bignumber": "^1.1.0",
     "dotenv": "^16.0.3",
-    "forge-std": "^1.1.2"
+    "ds-test": "github:dapphub/ds-test",
+    "forge-std": "^1.1.2",
+    "solmate": "^6.6.1"
   },
   "scripts": {
     "test": "hardhat test --grep 'FLASH LOAN TEST'",
-    "test:goerli": "hardhat test --grep 'FLASH LOAN TEST' --network goerli"
+    "test:goerli": "hardhat test --grep 'FLASH LOAN TEST' --network goerli",
+    "deploy:swap": "hardhat run scripts/deploy-swap.ts"
   }
 }
